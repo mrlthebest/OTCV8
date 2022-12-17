@@ -35,7 +35,6 @@ end)
 onTalk(function(name, level, mode, text)
     if name ~= player:getName() then return end
                         
-text = text:lower()
     if text == comboSpells then
          comboCD = now + comboCEDE
     end
