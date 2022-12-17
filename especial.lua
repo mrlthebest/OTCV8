@@ -35,7 +35,7 @@ macro(100, "Especial", function()
 end)
 
 if not storage.espCD then
-    espCD = 0
+    storage.espCD = 0
 end
 
 
