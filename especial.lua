@@ -28,7 +28,7 @@ macro(100, "Especial", function()
                 targetDistance = getDistanceBetween(pos(), targetPos)
                 if targetDistance <= especialDIST and target:getHealthPercent() <= especialHP and
                     storage.espCD <= os.time() then
-                        return say(especialSpells)
+                         return say(especialSpells)
                     end
               end
         end
