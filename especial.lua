@@ -9,10 +9,10 @@ end)
 especialHP = tonumber(strorage.espHP:split(','))
 
 
-addTextEdit("CD", storage.espCD or "CD1, CD2, CD3", function(widget, text)
-    storage.espCD = text
+addTextEdit("CD", storage.espCEDE or "CD1, CD2, CD3", function(widget, text)
+    storage.espCEDE = text
 end)
-especialCD = tonumber(strorage.espCD:split(','))
+especialCD = tonumber(strorage.espCEDE:split(','))
 
 
 addTextEdit("Distance", storage.espDISTANCIA or "DIST1, DIST2, DIST3", function(widget, text)
@@ -27,17 +27,22 @@ macro(100, "Especial", function()
             if targetPos then
                 targetDistance = getDistanceBetween(pos(), targetPos)
                 if targetDistance <= especialDIST and target:getHealthPercent() <= especialHP and
-                    (not espCD or espCd <= os.time()) then
+                    storage.espCD <= os.time() then
                         return say(especialSpells)
                     end
               end
         end
 end)
 
+if not storage.espCD then
+    espCD = 0
+end
+
+
 onTalk(function(name, level, mode, text)
     if name ~= player:getName() then return end
 
     if text == especialSpells then
-         espCD = os.time() + especialCD
+         storage.espCD = os.time() + especialCD
     end
 end)
