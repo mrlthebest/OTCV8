@@ -9,7 +9,7 @@ potionSetup = storage.potion:split(',')
 macro(100, "Potion", function()
     for _, potionConfig in ipairs(potionSetup) do
         if (hppercent() <= tonumber(potionConfig[2]) or manapercent() <= tonumber(potionConfig[3])) and
-            (not potionCD or potionCd <= now) then
+            (not potionCD or potionCD <= now) then
                 return useWith(tonumber(potionConfig[1]), player)
             end
         end
