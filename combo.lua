@@ -39,3 +39,4 @@ text = text:lower()
     if text == comboSpells then
          comboCD = now + comboCEDE
     end
+end)
