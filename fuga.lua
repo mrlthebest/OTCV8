@@ -8,10 +8,10 @@ addTextEdit("Hp", storage.fugaHP or "HP1, HP2, HP3", function(widget, text)
 end)
 fugaHP = tonumber(strorage.fugaHP:split(','))
 
-addTextEdit("CD", storage.fugaCD or "CD1, CD2, CD3", function(widget, text)
-    storage.fugaCD = text
+addTextEdit("CD", storage.fugaCIDI or "CD1, CD2, CD3", function(widget, text)
+    storage.fugaCIDI = text
 end)
-fugaCEDE = tonumber(strorage.fugaCD:split(','))
+fugaCEDE = tonumber(strorage.fugaCIDI:split(','))
 
 addTextEdit("Distance", storage.fugaDISTANCIA or "DIST1, DIST2, DIST3", function(widget, text)
     storage.fugaDISTANCIA = text
@@ -25,7 +25,7 @@ macro(100, "Fuga", function()
             if attackerPos then
                 attackerDistance = getDistanceBetween(pos(), attackerPos) 
                 if attackerDistance <= fugaDIST and hppercent() <= fugaHP and
-                    (not fugaCD or fugaCD <= os.time()) then
+                    storage.fugaCD <= os.time() then
                         return say(fugaSpells)
                     end
                 end
@@ -33,12 +33,14 @@ macro(100, "Fuga", function()
         end
 end)
 
-
+if not storage.fugaCD then
+    storage.fugaCD = 0
+end
 
 onTalk(function(name, level, mode, text)
     if name ~= player:getName() then return end
                         
     if text == fugaSpells then
-         fugaCD = os.time() + fugaCEDE
+         storage.fugaCD = os.time() + fugaCEDE
     end
 end)
