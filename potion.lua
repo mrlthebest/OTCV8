@@ -1,16 +1,16 @@
 local s = {}
 
 macro(100, "Potion", function()
-    local configSenzu = tonumber(storage.potion:split(","));
-    if (hppercent() <= configSenzu[2] or manapercent() <= configSenzu[3]) and (not s.cdW or s.cdW <= now) then
-        useWith(configSenzu[1], player)
+    local configSenzu = storage.potion:split(",");
+    if (hppercent() <= tonumber(configSenzu[2]) or manapercent() <= tonumber(configSenzu[3])) and (not s.cdW or s.cdW <= now) then
+        useWith(tonumber(configSenzu[1]), player)
     end
 end)
 
 onUseWith(function(pos, itemId, target, subType)
-    local configSenzu = tonumber(storage.potion:split(","));
-    if itemId == configSenzu[1] then
-        s.cdW = now + configSenzu[4]
+    local configSenzu = storage.potion:split(",");
+    if itemId == tonumber(configSenzu[1]) then
+        s.cdW = now + tonumber(configSenzu[4])
     end
 end)
 
