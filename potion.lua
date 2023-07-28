@@ -1,3 +1,9 @@
+--[[
+    Script de Potion
+    by mrlthebest.
+    28/07/2023
+]]--
+
 local s = {}
 
 macro(100, "Potion", function()
