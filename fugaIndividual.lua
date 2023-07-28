@@ -1,4 +1,4 @@
-Script de Fuga com HP Setado.
+Script de Fuga com HP Individual.
 by mrlthebest.
 28/07/2023
 
