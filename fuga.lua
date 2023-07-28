@@ -122,7 +122,7 @@ macro(100, "Fuga", function()
             return
         end
         if isAnyActive() then return; end
-        if (hppercent() <= hpEscape or isKeyPressed(value.key)) and (not value.totalCd or value.totalCd <= now) then
+        if (selfHealth <= hpEscape or isKeyPressed(value.key)) and (not value.totalCd or value.totalCd <= now) then
             say(value.spellToSay)
         end
     end
