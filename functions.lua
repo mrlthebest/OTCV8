@@ -53,6 +53,7 @@ function playersEnemies(range, multfloor)
     return specs;
 end
 
+--[[ BY UZUMAR ]]--
 -- findCreature(10, true, "player")
 -- findCreature(10, false, "player):getName() =="uzumar" then
 function findCreature(range, multifloor, type)
@@ -71,7 +72,7 @@ function findCreature(range, multifloor, type)
     end
 end
 
-
+--[[ BY RYAN ]]--
 --nearestCreature(10, true, "player") <= 3
 function nearestCreature(range, multifloor, type)
     range = range or 10
