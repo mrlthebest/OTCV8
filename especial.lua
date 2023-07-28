@@ -1,7 +1,8 @@
+--[[
 Script de Especial
 by mrlthebest.
 28/07/2023
-
+]]--
 --[[ CONFIGURE OS ESPECIAIS AQUI ]]--
 
 ESPECIAL = {
@@ -9,8 +10,6 @@ ESPECIAL = {
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
 }
-
-
 
 --------------------------------------------------------------------------
 ------------------------------[[ FUNCTIONS ]]-----------------------------
