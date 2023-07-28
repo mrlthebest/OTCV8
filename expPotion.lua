@@ -1,3 +1,9 @@
+--[[
+    Script de EXP Potion
+    by mrlthebest.
+    28/07/2023
+]]--
+
 local p = {}
 
 macro(100, "Exp Potion", function()
