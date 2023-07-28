@@ -1,7 +1,7 @@
 --[[
-  Script de Alarm
-  by mrlthebest.
-  28/07/2023
+    Script de Alarm
+    by mrlthebest.
+    28/07/2023
 ]]--
 
 local alarmBox = {}
