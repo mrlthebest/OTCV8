@@ -1,8 +1,9 @@
-Script de Combo
-By www.elfoscripts.com
-https://discord.gg/mzz9r3VjZq
-08/04/2023
-
+--[[
+    Script de Combo
+    By www.elfoscripts.com
+    https://discord.gg/mzz9r3VjZq
+    08/04/2023
+]]--
 
 
 --[[ ESSE É UM SCRIPT EDITADO INGAME POR UI, APENAS COLE ISTO NA CUSTOM/MACRO INGAME EDITOR ]]--
