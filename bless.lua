@@ -1,7 +1,7 @@
 --[[
-Script de Bless baseado no script do help_otcv8
-by mrlthebest.
-28/07/2023
+    Script de Bless baseado no script do help_otcv8
+    by mrlthebest.
+    28/07/2023
 ]]--
 
 local CONFIG = {
