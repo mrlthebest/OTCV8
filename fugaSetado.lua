@@ -152,6 +152,7 @@ onTalk(function(name, level, mode, text, channelId, pos)
         if text == value.spellScreen then
             value.totalCd = now + (value.cdTotal * 1000) - 250
             value.activeCd = now + (value.cdAtivo * 1000) - 250
+            break
         end
     end
 end)
