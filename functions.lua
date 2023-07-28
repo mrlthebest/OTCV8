@@ -133,3 +133,14 @@ function distanceAttacker()
         end
     end
 end
+
+--[[ FUNCTION QUE RETORNA O NOME DE QUEM ESTÁ TE ATACANDO ]]--
+local colorToMatch = {r = 0, g = 0, b = 0, a = 255}
+function attackerName()
+    for _, spec in ipairs(getSpectators()) do
+        if spec ~= player and spec:isPlayer() and spec:isTimedSquareVisible() and table.equals(spec:getTimedSquareColor(), colorToMatch) then
+            return spec:getName()
+        end
+    end
+end
+
