@@ -1,7 +1,8 @@
-Script de Fuga com HP Individual.
-by mrlthebest.
-28/07/2023
-
+--[[
+    Script de Fuga com HP Individual.
+    by mrlthebest.
+    28/07/2023
+]]--
 --[[ CONFIGURE AS FUGAS AQUI ]]--
 
 
