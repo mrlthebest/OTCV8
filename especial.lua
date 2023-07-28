@@ -1,7 +1,7 @@
 --[[
-Script de Especial
-by mrlthebest.
-28/07/2023
+    Script de Especial
+    by mrlthebest.
+    28/07/2023
 ]]--
 --[[ CONFIGURE OS ESPECIAIS AQUI ]]--
 
