@@ -1,3 +1,7 @@
+Script de Fuga com HP Setado.
+by mrlthebest.
+28/07/2023
+
 --[[ CONFIGURE AS FUGAS AQUI ]]--
 
 
@@ -9,6 +13,8 @@ FUGA = {
 
 local ESCAPE_PZ = true -- se estiver true, quando voce estiver com a vida necessaria para dar a fuga e estiver no pz vc vai deslogar, false o contrario.
 local DELAY_RECONNECT = 10 -- so mude isso se o escape pz estiver true, é o cd para reconectar ** SEGUNDOS **
+
+--NÃO EDITE NADA ABAIXO DAQUI
 -------------------------------------------------------------------
 
 --------------------[[ BY RYAN & VICTOR NEOX ]]--------------------
