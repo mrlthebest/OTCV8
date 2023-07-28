@@ -91,7 +91,7 @@ end
 
 -- function que define a porcentagem pra fuga pela quantidade de players atacantes
 function percentageEscape()
-    return  playersAttack() and PERCENTAGE_HPPERCENT + (5 * tonumber(playersAttack())) or 40
+    return playersAttack() and PERCENTAGE_HPPERCENT + (5 * tonumber(playersAttack())) or PERCENTAGE_HPPERCENT
 end
 
 -- function que checa se alguma fuga esta ativa
