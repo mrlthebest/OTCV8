@@ -12,7 +12,7 @@ local CONFIG = {
     UPDATE_GOLD = true, -- se estiver true, vai ficar atualizando a quantidade de gold
     ID_GOLD = 3043, -- id do gold
     ID_DOLLAR = 3035,  -- id do dolar
-    TEXT_GOLD = 'Using one of ([0-9]+) gold bars...'
+    TEXT_GOLD = 'Using one of ([0-9]+) gold bars...' -- texto de qndo vc usa o gold, não altere o () e o que está dentro
 }
 
 --------------------[[ BY RYAN & VICTOR NEOX ]]--------------------
