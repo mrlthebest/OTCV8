@@ -70,20 +70,8 @@ for key, value in pairs(testTable) do
     )
 end
 
--------------------------------------------------------------------
-
---------------------------[[ FUNCTIONS ]]--------------------------
-
--- function que checa se alguma fuga esta ativa
-function isAnyActive()
-    for index, value in ipairs(FUGA) do
-        if (value.activeCd and value.activeCd >= now) and hppercent() <= value.hpEscape then
-            return true
-        end
-    end
-end
-
 --------------------------------------------------------------------------
+
 
 ---------------------------[[ SCRIPT DE FUGA ]]---------------------------
 
@@ -101,7 +89,7 @@ macro(100, "Fuga", function()
             end)
             return
         end
-        if isAnyActive() then return; end
+        if (value.activeCd and value.activeCd >= now) then return; end
         if (selfHealth <= value.hpEscape or isKeyPressed(value.key)) and (not value.totalCd or value.totalCd <= now) then
             say(value.spellToSay)
         end
