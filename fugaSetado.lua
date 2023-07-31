@@ -104,7 +104,7 @@ end
 -- function que checa se alguma fuga esta ativa
 function isAnyActive()
     for index, value in ipairs(FUGA) do
-        if hppercent() <= percentageEscape() and (value.activeCd or value.activeCd >= now) then
+        if (value.activeCd and value.activeCd >= now) and hppercent() <= percentageEscape() then
             return true
         end
     end
