@@ -77,7 +77,7 @@ end
 -- function que checa se alguma fuga esta ativa
 function isAnyActive()
     for index, value in ipairs(FUGA) do
-        if hppercent() <= percentageEscape() and (value.activeCd or value.activeCd >= now) then
+        if (value.activeCd and value.activeCd >= now) and hppercent() <= value.hpEscape then
             return true
         end
     end
@@ -90,7 +90,7 @@ end
 local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed
 
 macro(100, "Fuga", function()
-    local selfHealth, hpEscape = g_game.getLocalPlayer():getHealthPercent(), percentageEscape()
+    local selfHealth = g_game.getLocalPlayer():getHealthPercent()
     for index, value in ipairs(FUGA) do
         if ESCAPE_PZ and selfHealth <= value.hpEscape and isInPz() then
             schedule(DELAY_RECONNECT*100, function()
