@@ -97,7 +97,7 @@ macro(100, "Fuga", function()
                 modules.game_interface.tryLogout(false)
                 modules.client_entergame.CharacterList.doLogin()
                 delay(400)
-                modules.game_textmessage.displayGameMessage('Se voce continuar com o hp abaixo de ' .. PERCENTAGE_HPPERCENT .. ' em ' .. DELAY_RECONNECT*100 .. ' voce ira deslogar novamente.')
+                modules.game_textmessage.displayGameMessage('Se voce continuar com o hp abaixo de ' .. PERCENTAGE_HPPERCENT .. ' em ' .. DELAY_RECONNECT*100 .. ' segundos voce ira deslogar novamente.')
             end)
             return
         end
