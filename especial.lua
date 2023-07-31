@@ -30,15 +30,6 @@ actualTarget = function() -- by ryan
     end
 end
 
--- function que checa se alguma fuga esta ativa
-function isAnyActive()
-    for index, value in ipairs(ESPECIAL) do
-        if actualTarget():getHealthPercent() <= value.hpTarget and value.activeCd and value.activeCd >= now then
-            return true
-        end
-    end
-end
-
 -------------------------[[ SCRIPT DE ESPECIAL ]]-------------------------
 local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed
 
@@ -49,9 +40,9 @@ macro(100, "Especial", function()
     local targetDistance = getDistanceBetween(pos(), targetPos)
 
     for index, value in ipairs(ESPECIAL) do
-        if isAnyActive() then return; end
+        if (value.activeCd and value.activeCd <= now) then return; end
         if ((target:getHealthPercent() <= value.hpTarget and targetDistance <= value.distanceTarget) or isKeyPressed(value.key)) then
-            if not value.totalCd or value.totalCd <= now then
+            if (not value.totalCd or value.totalCd <= now) then
                 say(value.spellToSay)
             end
         end
