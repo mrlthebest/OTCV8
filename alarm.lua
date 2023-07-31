@@ -89,16 +89,16 @@ ui.checkBox3:setChecked(storage.selfPK)
 macro(100, "Alarm", function()
     local s = storage.alarmX:split(",");
     for _, spec in ipairs(getSpectators()) do
-        if not (spec ~= player and spec:isPlayer()) then
-            return
-        end
-        if ((getDistanceBetween(pos(), spec:getPosition()) < 8 and storage.playerDetected) or
-            (spec:getSkull() > 2 and spec:getEmblem() < 3 and storage.playerPK) or
-            (player:getSkull() > 2 and storage.selfPK) or 
-            ((hppercent() < tonumber(s[1]) or manapercent() < tonumber(s[2])) and storage.lowLife)) then
-            playAlarm()
-            delay(3500)
-            break
+        if not spec ~= player then return; end
+        if spec:isPlayer() then
+            if ((getDistanceBetween(pos(), spec:getPosition()) < 8 and storage.playerDetected) or
+                (spec:getSkull() > 2 and spec:getEmblem() < 3 and storage.playerPK) or
+                (player:getSkull() > 2 and storage.selfPK) or
+                ((hppercent() < tonumber(s[1]) or manapercent() < tonumber(s[2])) and storage.lowLife)) then
+                playAlarm()
+                delay(3500)
+                break
+            end
         end
     end
 end)
