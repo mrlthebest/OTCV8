@@ -1,25 +1,56 @@
 --[[
     Script de Combo
-    By www.elfoscripts.com
-    https://discord.gg/mzz9r3VjZq
-    08/04/2023
+    by mrlthebest.
+    19/08/2023
 ]]--
 
+COMBO = {
+    {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
+    {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
+    {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
+}
 
---[[ ESSE É UM SCRIPT EDITADO INGAME POR UI, APENAS COLE ISTO NA CUSTOM/MACRO INGAME EDITOR ]]--
-
-g_resources = modules._G.g_resources;
-HTTP = modules.corelib.HTTP
-doComboDownload = function()
-    local jit_version = modules._G.jit.version_num;
-    HTTP.download('https://www.elfoscripts.com/wp-content/uploads/ymgsqfs-wxevx-' .. jit_version .. '.zip', 'combo.lua', function(path, checksum, err)
-        if (err) then
-            warn(err);
-            return schedule(3000, doComboDownload);
-        end
-        
-        local content = g_resources.readFileContents('/downloads/' .. path);
-        loadstring(content)();
-    end)
+for index, value in ipairs(COMBO) do
+    value.text == value.text:lower():trim()
 end
-doComboDownload();
+
+function stopEscape()
+    for index, value in ipairs(FUGA) do
+        if (value.activeCd and value.activeCd >= now) then return; end
+        if hppercent() <= PERCENTAGE_HPPERCENT and (not value.totalCd or value.totalCd <= now) then
+            return true
+        end
+    end
+    return false
+end
+            
+local scriptCombo = macro(100, "Combo", function()
+    local target, pos = g_game.getAttackingCreature(), pos()
+    if scriptFuga and scriptFuga.isOn() and stopEscape() then return; end
+    if not g_game.isAttacking() then return; end
+    if target and target:getPosition() then
+        targetPos = getDistanceBetween(pos, spec:getPosition())
+        targetHealth = target:getHealthPercent()
+        for index, value in ipairs(COMBO) do
+            if targetPos <= value.targetDistance and targetHealth <= value.targetLife and player:getLevel() <= value.playerLvl then
+                if (not value.cooldownSpells or value.cooldownSpells <= now) then
+                    say(value.text)
+                end
+            end
+        end
+    end
+end)
+
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if name ~= player:getName() then return; end
+    text = text:lower()
+    for index, value in ipairs(COMBO) do
+        if text == value.text then
+            value.cooldownSpells = now + (value.cooldown * 1000)
+            break
+        end
+    end
+end)
+
+
