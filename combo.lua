@@ -29,7 +29,7 @@ local scriptCombo = macro(100, "Combo", function()
     if mrlEscape and scriptFuga.isOn() and stopEscape() then return; end
     if not g_game.isAttacking() then return; end
     if target and target:getPosition() then
-        targetPos = getDistanceBetween(pos, spec:getPosition())
+        targetPos = getDistanceBetween(pos, target:getPosition())
         targetHealth = target:getHealthPercent()
         for index, value in ipairs(COMBO) do
             if targetPos <= value.targetDistance and targetHealth <= value.targetLife and player:getLevel() >= value.playerLvl then
