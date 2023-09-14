@@ -89,7 +89,7 @@ end
 function playersAttack()
     local playersCount = 0;
     for _, spec in ipairs(getSpectators(true)) do
-        if spec:isPlayer() and spec:isTimedSquareVisible() and table.equals(spec:getTimedSquareColor(), colorToMatch) and getDistanceBetween(pos(), spec:getPosition())) <= 10 then
+        if spec:isPlayer() and spec:isTimedSquareVisible() and table.equals(spec:getTimedSquareColor(), colorToMatch) and getDistanceBetween(pos(), spec:getPosition()) <= 10 then
             playersCount = playersCount + 1
         end
     end
