@@ -14,19 +14,9 @@ for index, value in ipairs(COMBO) do
     value.text = value.text:lower():trim()
 end
 
-function stopEscape()
-    for index, value in ipairs(FUGA) do
-        if (value.activeCd and value.activeCd >= now) then return; end
-        if hppercent() <= PERCENTAGE_HPPERCENT and (not value.totalCd or value.totalCd <= now) then
-            return true
-        end
-    end
-    return false
-end
             
 local scriptCombo = macro(100, "Combo", function()
     local target, pos = g_game.getAttackingCreature(), pos()
-    if mrlEscape and scriptFuga.isOn() and stopEscape() then return; end
     if not g_game.isAttacking() then return; end
     if target and target:getPosition() then
         targetPos = getDistanceBetween(pos, target:getPosition())
