@@ -11,7 +11,7 @@ COMBO = {
 }
 
 for index, value in ipairs(COMBO) do
-    value.text == value.text:lower():trim()
+    value.text = value.text:lower():trim()
 end
 
 function stopEscape()
