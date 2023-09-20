@@ -1,4 +1,4 @@
---[[
+--[[
     Script de Alarm
     by mrlthebest.
     28/07/2023
@@ -6,13 +6,13 @@
 
 local alarmBox = {}
 
-local ui = setupUI([[
+ui = setupUI([[
 
 Panel
   height: 80
 
   CheckBox
-    id: checkBox
+    id: playerD
     font: cipsoftFont
     text: Player Detected
     anchors.top: parent.top
@@ -22,7 +22,7 @@ Panel
     text-offset: 17 0
 
   CheckBox
-    id: checkBox1
+    id: playerP
     font: cipsoftFont
     text: Player PK
     anchors.left: parent.left
@@ -32,7 +32,7 @@ Panel
     text-offset: 17 0  
 
   CheckBox
-    id: checkBox2
+    id: playerH
     font: cipsoftFont
     text: Low Life/HP
     anchors.left: parent.left
@@ -42,7 +42,7 @@ Panel
     text-offset: 17 0  
 
   CheckBox
-    id: checkBox3
+    id: playerSP
     font: cipsoftFont
     text: Self PK
     anchors.left: parent.left
@@ -53,49 +53,49 @@ Panel
 ]])
 
 ---------------------------------------------------------------
-ui.checkBox.onCheckChange = function(widget, checked)
+ui.playerD.onCheckChange = function(widget, checked)
     storage.playerDetected = checked
 end
 
 if storage.playerDetected == nil then storage.playerDetected = true end
 
-ui.checkBox:setChecked(storage.playerDetected)
+ui.playerD:setChecked(storage.playerDetected)
 ---------------------------------------------------------------
-ui.checkBox1.onCheckChange = function(widget, checked)
+ui.playerP.onCheckChange = function(widget, checked)
     storage.playerPK = checked
 end
 
 if storage.playerPK == nil then storage.playerPK = true end
 
-ui.checkBox1:setChecked(storage.playerPK)
+ui.playerP:setChecked(storage.playerPK)
 ---------------------------------------------------------------
-ui.checkBox2.onCheckChange = function(widget, checked)
+ui.playerH.onCheckChange = function(widget, checked)
     storage.lowLife = checked
 end
 
 if storage.lowLife == nil then storage.lowLife = true end
 
-ui.checkBox2:setChecked(storage.lowLife)
+ui.playerH:setChecked(storage.lowLife)
 ---------------------------------------------------------------
-ui.checkBox3.onCheckChange = function(widget, checked)
+ui.playerSP.onCheckChange = function(widget, checked)
     storage.selfPK = checked
 end
 
 if storage.selfPK == nil then storage.selfPK = true end
 
-ui.checkBox3:setChecked(storage.selfPK)
+ui.playerSP:setChecked(storage.selfPK)
 ---------------------------------------------------------------
 
 macro(100, "Alarm", function()
     local s = storage.alarmX:split(",");
     for _, spec in ipairs(getSpectators()) do
-        if not spec ~= player then return; end
+        if spec == player then return; end
         if spec:isPlayer() then
             if ((getDistanceBetween(pos(), spec:getPosition()) < 8 and storage.playerDetected) or
                 (spec:getSkull() > 2 and spec:getEmblem() < 3 and storage.playerPK) or
                 (player:getSkull() > 2 and storage.selfPK) or
                 ((hppercent() < tonumber(s[1]) or manapercent() < tonumber(s[2])) and storage.lowLife)) then
-                playAlarm()
+                playSound("/sounds/alarm.ogg")
                 delay(3500)
                 break
             end
