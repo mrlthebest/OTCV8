@@ -8,7 +8,7 @@ local p = {}
 
 macro(100, "Exp Potion", function()
     local setup = storage.expSetup:split(",");
-        local potId = tonumber(setup[1])
+    local potId = tonumber(setup[1])
     if isInPz() then return; end
     if not p.cdW or p.cdW <= os.time() then
         if findItem(potId) then
