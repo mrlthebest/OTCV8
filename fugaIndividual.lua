@@ -77,7 +77,7 @@ end
 
 local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed
 
-macro(100, "Fuga", function()
+FUGA.Script = macro(100, "Fuga", function()
     local selfHealth = g_game.getLocalPlayer():getHealthPercent()
     for index, value in ipairs(FUGA) do
         if ESCAPE_PZ and selfHealth <= value.hpEscape and isInPz() then
