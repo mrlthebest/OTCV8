@@ -7,6 +7,7 @@
 
 
 FUGA = {
+    -- example:     {spellToSay = 'izanagi', spellScreen = 'izanagi', hpEscape = 40, cdTotal = 60, cdAtivo = 3, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpEscape = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpEscape = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpEscape = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
