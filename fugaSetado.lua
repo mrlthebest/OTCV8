@@ -8,6 +8,7 @@
 
 
 FUGA = {
+    --example:     {spellToSay = 'izanagi', spellScreen = 'izanagi', cdTotal = 90, cdAtivo = 3, key = 'F1'},
     {spellToSay = '', spellScreen = '', cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', cdTotal = XX, cdAtivo = XX, key = 'F1'},
