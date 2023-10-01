@@ -5,6 +5,7 @@
 ]]--
 
 COMBO = {
+    --example:     {text = 'big explosion', cooldown = 1, targetDistance = 3, targetLife = 100, playerLvl = 50},
     {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
     {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
     {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
@@ -26,7 +27,6 @@ end
 
 macro(100, "Combo", function()
     local target, pos = g_game.getAttackingCreature(), pos()
-    if FUGA.Script.isOn() and stopEscape() then return; end
     if not g_game.isAttacking() then return; end
     if target and target:getPosition() then
         targetPos = getDistanceBetween(pos, target:getPosition())
