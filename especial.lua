@@ -6,6 +6,7 @@
 --[[ CONFIGURE OS ESPECIAIS AQUI ]]--
 
 ESPECIAL = {
+    --example:     {spellToSay = 'hakai', spellScreen = 'hakai', hpTarget = 15, distanceTarget = 3, cdTotal = 60, cdAtivo = 1, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
