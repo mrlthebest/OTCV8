@@ -1,31 +1,28 @@
 UI.Button("Friend List", function(newText)
-    UI.MultilineEditorWindow(storage.friendList or "", {title="FriendList", description="Example: \nplayer \nplayer"}, function(text)
+    UI.MultilineEditorWindow(storage.friendList or '', {title="FriendList", description="Example: \nplayer \nplayer"}, function(text)
         storage.friendList = text;
     end)
 end)
 
-addTextEdit("Pot: id, delay, distance, percentage", storage.potConfig or "Pot: id, delay, distance, percentage", function(widget, text)
+addTextEdit("Pot: Spell, delay, distance, percentage", storage.healFriend or "Pot: Spell, delay, distance, percentage", function(widget, text)
     storage.healFriend = text;
 end)
 
-function isFriend(name, friendList)
-    local configList = string.split(friendList, '\n')
-    return table.contains(configList, name, true)
-end
 
-macro(100, "Heal Friend", function()
-    local pos = pos();
-    local splitPot = storage.healFriend:split(',');
-    local friendList = storage.friendList
+macro(100, "Heal Friend",function()
+    local playerPos = pos();
+    local friendList = string.split(storage.friendList, '\n');
+    local configHeal = storage.healFriend:split(',');
     for _, spec in ipairs(getSpectators()) do
-        if isFriend(spec:getName(), friendList) then
-            if spec:getHealthPercent() <= tonumber(splitPot[4]) and
-                getDistanceBetween(pos, spec:getPosition()) <= tonumber(splitPot[3]) then
-                if (not cd or cd <= now) then
-                    useWith(tonumber(splitPot[1]), spec)
-                    cd = now + (tonumber(splitPot[2]) * 1000)
-                end
+        if (table.contains(friendList, spec:getName(), true) or (spec:getEmblem() == 1 or spec:getShield() == 3)) then
+            local specPos = spec:getPosition();
+            local specHealth = spec:getHealthPercent();
+            if not specPos then return; end
+            local distanceToSpec = getDistanceBetween(playerPos, specPos);
+            if distanceToSpec <= tonumber(configHeal[3]) and specHealth <= tonumber(configHeal[4]) then
+                say(configHeal[1] .. ' "' .. spec:getName())
+                delay(tonumber(configHeal[2]))
             end
         end
     end
-end)
+end);
