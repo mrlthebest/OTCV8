@@ -1,8 +1,3 @@
---[[
-    Script de Alarm
-    by mrlthebest.
-    28/07/2023
-]]--
 
 local alarmBox = {}
 
@@ -86,27 +81,32 @@ if storage.selfPK == nil then storage.selfPK = true end
 ui.playerSP:setChecked(storage.selfPK)
 ---------------------------------------------------------------
 
+
 macro(100, "Alarm", function()
-    local s = storage.alarmX:split(",");
+    local configAlarm = storage.alarmX:split(",")
+    local playerPos = player:getPosition();
+    local selfHealth, selfMana = hppercent(), manapercent();
+    local selfSkull = player:getSkull();
     for _, spec in ipairs(getSpectators()) do
-        if spec == player then return; end
         if spec:isPlayer() then
-            if ((getDistanceBetween(pos(), spec:getPosition()) < 8 and storage.playerDetected) or
-                (spec:getSkull() > 2 and spec:getEmblem() < 3 and storage.playerPK) or
-                (player:getSkull() > 2 and storage.selfPK) or
-                ((hppercent() < tonumber(s[1]) or manapercent() < tonumber(s[2])) and storage.lowLife)) then
-                playSound("/sounds/alarm.ogg")
-                delay(3500)
-                break
+            local specPos = spec:getPosition();
+            local specSkull = spec:getSkull();
+            local distanceToSpec = getDistanceBetween(playerPos, specPos);
+            if (
+                (spec ~= player and distanceToSpec < 8 and storage.playerDetected) or
+                (spec ~= player and specSkull > 2 and storage.playerPK) or
+                (selfSkull > 2 and storage.selfPK) or
+                ((selfHealth <= tonumber(configAlarm[1]) or selfMana <= tonumber(configAlarm[2])) and storage.lowLife)
+            ) then
+                if not x or x <= os.time() then
+                    playSound("/sounds/alarm.ogg")
+                    x = os.time() + 4;
+                end
             end
         end
     end
-end)
-
+end);
 
 addTextEdit("HP, MP", storage.alarmX or "HP, MP", function(widget, text)
-    if text and #text:split(",") < 2 then
-        return warn("por favor, inserir os valores na ordem (HP, MP)")
-    end
     storage.alarmX = text;
-end)
+end);
