@@ -21,6 +21,7 @@ macro(100, "Heal Friend",function()
             local distanceToSpec = getDistanceBetween(playerPos, specPos);
             if distanceToSpec <= tonumber(configHeal[3]) and specHealth <= tonumber(configHeal[4]) then
                 say(configHeal[1] .. ' "' .. spec:getName())
+                --useWith(tonumber(configHeal[1], spec) // para item, tire as duas "--" dessa linha e adicione na linha acima.
                 delay(tonumber(configHeal[2]))
             end
         end
