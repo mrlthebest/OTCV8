@@ -1,9 +1,3 @@
---[[
-    Script de Combo
-    by mrlthebest.
-    19/08/2023
-]]--
-
 COMBO = {
     --example:     {text = 'big explosion', cooldown = 1, targetDistance = 3, targetLife = 100, playerLvl = 50},
     {text = '', cooldown = XX, targetDistance = XX, targetLife = XX, playerLvl = XX},
@@ -12,25 +6,17 @@ COMBO = {
 }
 
 for index, value in ipairs(COMBO) do
-    value.text = value.text:lower():trim()
-end
-
-
-function stopEscape()
-    for key, value in ipairs(FUGA) do
-        if value.activeCd and value.activeCd >= now then return; end
-        if hppercent() <= value.hpEscape and (not value.totalCd or value.totalCd <= now) then
-                return true
-        end
-    end
+    value.text = value.text:lower():trim();
 end
 
 macro(100, "Combo", function()
-    local target, pos = g_game.getAttackingCreature(), pos()
+    local target, playerPos = g_game.getAttackingCreature(), pos();
     if not g_game.isAttacking() then return; end
-    if target and target:getPosition() then
-        targetPos = getDistanceBetween(pos, target:getPosition())
-        targetHealth = target:getHealthPercent()
+    if target then
+        local targetPosition = target:getPosition();
+        if not targetPosition then return; end
+        targetPos = getDistanceBetween(playerPos, targetPosition);
+        targetHealth = target:getHealthPercent();
         for index, value in ipairs(COMBO) do
             if targetPos <= value.targetDistance and targetHealth <= value.targetLife and player:getLevel() >= value.playerLvl then
                 if (not value.cooldownSpells or value.cooldownSpells <= now) then
@@ -39,7 +25,7 @@ macro(100, "Combo", function()
             end
         end
     end
-end)
+end);
 
 
 onTalk(function(name, level, mode, text, channelId, pos)
@@ -47,10 +33,10 @@ onTalk(function(name, level, mode, text, channelId, pos)
     text = text:lower()
     for index, value in ipairs(COMBO) do
         if text == value.text then
-            value.cooldownSpells = now + (value.cooldown * 1000)
-            break
+            value.cooldownSpells = now + (value.cooldown * 1000);
+            break;
         end
     end
-end)
+end);
 
 
