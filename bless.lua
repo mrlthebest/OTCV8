@@ -1,21 +1,21 @@
---[[
-    Script de Bless baseado no script do help_otcv8
-    by mrlthebest.
-    28/07/2023
-]]--
+
+------------------------- [[ EDITE AQUI ]] -----------------------
 
 local CONFIG = {
     BLESS_COMMAND = '!bless', -- comando p comprar a bless
     BLESS_PRICE = 40, -- golds
-    BLESS_MONEY = 'bless do hokage sarutobi', -- messagem se ja tem bless.
-    BLESS_NOTMONEY = 'dinheiro suficiente', -- mensagem se não tem gold
+    BLESS_MONEY = 'com a bless', -- messagem se ja tem bless (MENSAGEM ACIMA DO CHAT EM BRANCO.)
+    BLESS_NOTMONEY = 'dinheiro suficiente', -- mensagem se não tem gold (MENSAGEM ACIMA DO CHAT EM BRANCO.)
     UPDATE_GOLD = true, -- se estiver true, vai ficar atualizando a quantidade de gold
     ID_GOLD = 3043, -- id do gold
     ID_DOLLAR = 3035,  -- id do dolar
-    TEXT_GOLD = 'Using one of ([0-9]+) gold bars...' -- texto de qndo vc usa o gold, não altere o () e o que está dentro
+    TEXT_GOLD = 'Using one of ([0-9]+) gold bars...', -- texto de qndo vc usa o gold, não altere o () e o que está dentro
+    NPC_NAME = '[NPC] Yama'
 }
 
---------------------[[ BY RYAN & VICTOR NEOX ]]--------------------
+-- NÃO EDITE NADA ABAIXO DISSO.
+-------------------------------------------------------------------
+
 storage.widgetPos = storage.widgetPos or {}
 
 local widgetConfig = [[
@@ -27,13 +27,14 @@ UIWidget
   phantom: false
   draggable: true
   text-auto-resize: true
+]];
 
-]]
+-------------------------------------------------------------------
 
-local blessWidget = {}
+local blessWidget = {};
 
-blessWidget['goldWidget'] = setupUI(widgetConfig, g_ui.getRootWidget())
-blessWidget['blessWidget'] = setupUI(widgetConfig, g_ui.getRootWidget())
+blessWidget['goldWidget'] = setupUI(widgetConfig, g_ui.getRootWidget());
+blessWidget['blessWidget'] = setupUI(widgetConfig, g_ui.getRootWidget());
 
 local function attachSpellWidgetCallbacks(key)
     blessWidget[key].onDragEnter = function(widget, mousePos)
@@ -70,7 +71,7 @@ end
 
 -------------------------------------------------------------------
 
---------------------------[[ SCRIPT ]]--------------------------
+----------------------------[[ SCRIPT ]]---------------------------
 
 local goldCount = 0;
 onTextMessage(function(mode, text)
@@ -78,9 +79,11 @@ onTextMessage(function(mode, text)
         goldCount = tonumber(text:match("%d+"))
         blessWidget['goldWidget']:setText('Golds: ' .. goldCount)
     end
-end)
-storage.haveBless = false
+end);
+
+storage.haveBless = false;
 local blessScript = macro(100, "Bless", function()
+    local playerPos = pos();
     if not storage.haveBless then
         say(CONFIG.BLESS_COMMAND)
         delay(1000)
@@ -89,9 +92,14 @@ local blessScript = macro(100, "Bless", function()
     else
         blessWidget['blessWidget']:setText("Bless: True | Bless Restante: " .. math.floor(goldCount / CONFIG.BLESS_PRICE))
         blessWidget['blessWidget']:setColor("green")
+        local findNpc = getCreatureByName(CONFIG.NPC_NAME);
+        if findNpc and getDistanceBetween(playerPos, findNpc:getPosition()) <= 4 then
+            NPC.say('hi')
+        end
     end
-end)
+end);
 
+-------------------------------------------------------------------
 
 macro(1, function()
     if blessScript.isOff() then return; end
@@ -103,14 +111,15 @@ macro(1, function()
             X = os.time() + 180
         end
     end
-end)
+end);
+
+-------------------------------------------------------------------
 
 onTextMessage(function(mode, text)
     if blessScript.isOff() then return; end
     if text:lower():find(CONFIG.BLESS_NOTMONEY) then
-        storage.haveBless = false
+        storage.haveBless = false;
+    elseif text:lower():find(CONFIG.BLESS_MONEY) then
+        storage.haveBless = true;
     end
-    if text:lower():find(CONFIG.BLESS_MONEY) then
-        storage.haveBless = true
-    end
-end)
+end);
