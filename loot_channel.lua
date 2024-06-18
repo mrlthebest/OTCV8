@@ -1,4 +1,4 @@
--- Créditos: vBot Loot 
+-- Créditos: vBot Loot, Dimi
 local function add(t, text, color, last)
   table.insert(t, text)
   table.insert(t, color)
