@@ -1,10 +1,4 @@
---[[
-    Script de Fuga com HP Individual.
-    by mrlthebest.
-    28/07/2023
-]]--
 --[[ CONFIGURE AS FUGAS AQUI ]]--
-
 
 FUGA = {
     -- example:     {spellToSay = 'izanagi', spellScreen = 'izanagi', hpEscape = 40, cdTotal = 60, cdAtivo = 3, key = 'F1'},
@@ -32,14 +26,14 @@ UIWidget
   draggable: true
   text-auto-resize: true
 
-]]
+]];
 
-local testTable = {}
+local widgetFuga = {};
 
-testTable['fugaWidget'] = setupUI(widgetConfig, g_ui.getRootWidget())
+widgetFuga['fugaWidget'] = setupUI(widgetConfig, g_ui.getRootWidget());
 
 local function attachSpellWidgetCallbacks(key)
-    testTable[key].onDragEnter = function(widget, mousePos)
+    widgetFuga[key].onDragEnter = function(widget, mousePos)
         if not modules.corelib.g_keyboard.isCtrlPressed() then
             return false
         end
@@ -48,7 +42,7 @@ local function attachSpellWidgetCallbacks(key)
         return true
     end
 
-    testTable[key].onDragMove = function(widget, mousePos, moved)
+    widgetFuga[key].onDragMove = function(widget, mousePos, moved)
         local parentRect = widget:getParent():getRect()
         local x = math.min(math.max(parentRect.x, mousePos.x - widget.movingReference.x), parentRect.x + parentRect.width - widget:getWidth())
         local y = math.min(math.max(parentRect.y - widget:getParent():getMarginTop(), mousePos.y - widget.movingReference.y), parentRect.y + parentRect.height - widget:getHeight())
@@ -56,7 +50,7 @@ local function attachSpellWidgetCallbacks(key)
         return true
     end
 
-    testTable[key].onDragLeave = function(widget, pos)
+    widgetFuga[key].onDragLeave = function(widget, pos)
         storage.widgetPos[key] = {}
         storage.widgetPos[key].x = widget:getX();
         storage.widgetPos[key].y = widget:getY();
@@ -64,9 +58,9 @@ local function attachSpellWidgetCallbacks(key)
     end
 end
 
-for key, value in pairs(testTable) do
+for key, value in pairs(widgetFuga) do
     attachSpellWidgetCallbacks(key)
-    testTable[key]:setPosition(
+    widgetFuga[key]:setPosition(
         storage.widgetPos[key] or {0, 50}
     )
 end
@@ -76,41 +70,41 @@ end
 
 ---------------------------[[ SCRIPT DE FUGA ]]---------------------------
 
-local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed
+local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed;
 
 FUGA.Script = macro(100, "Fuga", function()
-    local selfHealth = g_game.getLocalPlayer():getHealthPercent()
+    local selfHealth = hppercent();
     for index, value in ipairs(FUGA) do
         if ESCAPE_PZ and selfHealth <= value.hpEscape and isInPz() then
+            modules.game_textmessage.displayGameMessage('Se voce continuar com o hp abaixo de ' .. PERCENTAGE_HPPERCENT .. ' em ' .. DELAY_RECONNECT*100 .. ' segundos voce ira deslogar.')
             schedule(DELAY_RECONNECT*100, function()
                 modules.game_interface.tryLogout(false)
                 modules.client_entergame.CharacterList.doLogin()
                 delay(400)
-                modules.game_textmessage.displayGameMessage('Se voce continuar com o hp abaixo de ' .. PERCENTAGE_HPPERCENT .. ' em ' .. DELAY_RECONNECT*100 .. ' segundos voce ira deslogar novamente.')
             end)
-            return
+            return;
         end
         if (value.activeCd and value.activeCd >= now) then return; end
         if (selfHealth <= value.hpEscape or isKeyPressed(value.key)) and (not value.totalCd or value.totalCd <= now) then
             say(value.spellToSay)
         end
     end
-end)
+end);
 
 --------------------[[ CHECANDO E DEFININDO OS CDS ]]--------------------
 
 for index, value in ipairs(FUGA) do
-    value.spellScreen = value.spellScreen:lower():trim()
+    value.spellScreen = value.spellScreen:lower():trim();
 end
 
 onTalk(function(name, level, mode, text, channelId, pos)
     if name ~= player:getName() then return; end
-    text = text:lower()
+    text = text:lower();
     for index, value in ipairs(FUGA) do
         if text == value.spellScreen then
-            value.totalCd = now + (value.cdTotal * 1000) - 250
-            value.activeCd = now + (value.cdAtivo * 1000) - 250
-            break
+            value.totalCd = now + (value.cdTotal * 1000) - 250;
+            value.activeCd = now + (value.cdAtivo * 1000) - 250;
+            break;
         end
     end
-end)
+end);
