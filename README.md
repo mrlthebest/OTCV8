@@ -1,1 +1,3 @@
-not a programer, just a hobby ;)
+not a programmer, just a hobby ;)
+
+discord: mrlthebest.
