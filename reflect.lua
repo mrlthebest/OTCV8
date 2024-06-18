@@ -1,6 +1,3 @@
-setDefaultTab('Main')
-
-
 local reflectSpell = 'reflect' -- spell de reflect
 local reflectCooldown = 2 -- em segundos
 
