@@ -1,8 +1,3 @@
---[[
-    Script de Especial
-    by mrlthebest.
-    28/07/2023
-]]--
 --[[ CONFIGURE OS ESPECIAIS AQUI ]]--
 
 ESPECIAL = {
@@ -10,8 +5,9 @@ ESPECIAL = {
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
     {spellToSay = '', spellScreen = '', hpTarget = XX, distanceTarget = XX, cdTotal = XX, cdAtivo = XX, key = 'F1'},
-}
+};
 
+-- NÃO EDITE ABAIXO.
 --------------------------------------------------------------------------
 ------------------------------[[ FUNCTIONS ]]-----------------------------
 
@@ -19,12 +15,12 @@ actualTarget = function() -- by ryan
     for key, func in pairs(g_game) do
         if key:lower():find('getatt') then
             local status, result = pcall(function()
-                return func():getId()
-            end)
+                return func():getId();
+            end);
             if status then
-                local creature = getCreatureById(result)
+                local creature = getCreatureById(result);
                 if creature then
-                    return creature
+                    return creature;
                 end
             end
         end
@@ -32,7 +28,7 @@ actualTarget = function() -- by ryan
 end
 
 -------------------------[[ SCRIPT DE ESPECIAL ]]-------------------------
-local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed
+local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed;
 
 macro(100, "Especial", function()
     local target = actualTarget()
@@ -53,18 +49,18 @@ end)
 --------------------[[ CHECANDO E DEFININDO OS CDS ]]---------------------
 
 for index, value in ipairs(ESPECIAL) do
-    value.spellScreen = value.spellScreen:lower():trim()
+    value.spellScreen = value.spellScreen:lower():trim();
 end
 
 onTalk(function(name, level, mode, text, channelId, pos)
     if name ~= player:getName() then return; end
-    text = text:lower()
+    text = text:lower();
 
     for index, value in ipairs(ESPECIAL) do
         if text == value.spellScreen then
-            value.totalCd = now + (value.cdTotal * 1000) - 250
-            value.activeCd = now + (value.cdAtivo * 1000) - 250
-            break
+            value.totalCd = now + (value.cdTotal * 1000) - 250;
+            value.activeCd = now + (value.cdAtivo * 1000) - 250;
+            break;
         end
     end
-end)
+end);
