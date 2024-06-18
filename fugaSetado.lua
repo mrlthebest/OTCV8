@@ -14,8 +14,7 @@ local DELAY_RECONNECT = 10 -- so mude isso se o escape pz estiver true, é o cd 
 --NÃO EDITE NADA ABAIXO DAQUI
 -------------------------------------------------------------------
 
---------------------[[ BY RYAN & VICTOR NEOX ]]--------------------
-storage.widgetPos = storage.widgetPos or {}
+storage.widgetPos = storage.widgetPos or {};
 
 local widgetConfig = [[
 UIWidget
@@ -26,50 +25,49 @@ UIWidget
   phantom: false
   draggable: true
   text-auto-resize: true
+]];
 
-]]
+local widgetFuga = {};
 
-local widgetFuga = {}
-
-widgetFuga['fugaWidget'] = setupUI(widgetConfig, g_ui.getRootWidget())
+widgetFuga['fugaWidget'] = setupUI(widgetConfig, g_ui.getRootWidget());
 
 local function attachSpellWidgetCallbacks(key)
     widgetFuga[key].onDragEnter = function(widget, mousePos)
         if not modules.corelib.g_keyboard.isCtrlPressed() then
-            return false
+            return false;
         end
         widget:breakAnchors()
-        widget.movingReference = { x = mousePos.x - widget:getX(), y = mousePos.y - widget:getY() }
-        return true
+        widget.movingReference = { x = mousePos.x - widget:getX(), y = mousePos.y - widget:getY() };
+        return true;
     end
 
     widgetFuga[key].onDragMove = function(widget, mousePos, moved)
         local parentRect = widget:getParent():getRect()
         local x = math.min(math.max(parentRect.x, mousePos.x - widget.movingReference.x), parentRect.x + parentRect.width - widget:getWidth())
         local y = math.min(math.max(parentRect.y - widget:getParent():getMarginTop(), mousePos.y - widget.movingReference.y), parentRect.y + parentRect.height - widget:getHeight())
-        widget:move(x, y)
-        return true
+        widget:move(x, y);
+        return true;
     end
 
     widgetFuga[key].onDragLeave = function(widget, pos)
-        storage.widgetPos[key] = {}
+        storage.widgetPos[key] = {};
         storage.widgetPos[key].x = widget:getX();
         storage.widgetPos[key].y = widget:getY();
-        return true
+        return true;
     end
 end
 
 for key, value in pairs(widgetFuga) do
-    attachSpellWidgetCallbacks(key)
+    attachSpellWidgetCallbacks(key);
     widgetFuga[key]:setPosition(
         storage.widgetPos[key] or {0, 50}
-    )
+    );
 end
 
 -------------------------------------------------------------------
 
 --------------------------[[ FUNCTIONS ]]--------------------------
-local colorToMatch = {r = 0, g = 0, b = 0, a = 255}
+local colorToMatch = {r = 0, g = 0, b = 0, a = 255};
 
 -- functino que retorna a distancia do atacante
 function distanceAttacker()
