@@ -37,7 +37,7 @@ macro(100, "Especial", function()
     local targetDistance = getDistanceBetween(pos(), targetPos)
 
     for index, value in ipairs(ESPECIAL) do
-        if (value.activeCd and value.activeCd <= now) then return; end
+        if (value.activeCd and value.activeCd >= now) then return; end
         if ((target:getHealthPercent() <= value.hpTarget and targetDistance <= value.distanceTarget) or isKeyPressed(value.key)) then
             if (not value.totalCd or value.totalCd <= now) then
                 say(value.spellToSay)
