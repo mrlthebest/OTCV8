@@ -8,6 +8,7 @@ local bijuuSpells = {
 
 macro(100, "Bijuu Attack", function()
     if player:getOutfit().type ~= bijuuOutfit then return; end
+    if not g_game.isAttacking() then return; end
     for key, value in ipairs(bijuuSpells) do
         if (not value.cooldownSpells or value.cooldownSpells <= os.time()) then
             say(value.spell)
