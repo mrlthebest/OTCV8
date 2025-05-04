@@ -104,15 +104,6 @@ local isKeyPressed = modules.corelib.g_keyboard.isKeyPressed;
 FUGA.Script = macro(100, "Fuga", function()
     local selfHealth, hpEscape = g_game.getLocalPlayer():getHealthPercent(), percentageEscape()
     for index, value in ipairs(FUGA) do
-        if ESCAPE_PZ and selfHealth <= hpEscape and isInPz() then
-            modules.game_textmessage.displayGameMessage('Se voce continuar com o hp abaixo de ' .. PERCENTAGE_HPPERCENT .. ' em ' .. DELAY_RECONNECT*100 .. ' segundos voce ira deslogar.')
-            schedule(DELAY_RECONNECT*100, function()
-                modules.game_interface.tryLogout(false)
-                modules.client_entergame.CharacterList.doLogin()
-                delay(400)
-            end)
-            return
-        end
         if (value.activeCd and value.activeCd >= now) then return; end
         if (selfHealth <= hpEscape or isKeyPressed(value.key)) and (not value.totalCd or value.totalCd <= now) then
             say(value.spellToSay)
