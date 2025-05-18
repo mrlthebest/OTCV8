@@ -1,4 +1,4 @@
-local defaultStyles = {
+defaultStyles = {
     ["Window"] = [[
 Window < UIWindow
   font: verdana-11px-antialised
