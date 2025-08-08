@@ -101,11 +101,18 @@ panel['manaWidget']:setVisible(config.manaBar)
 panel['targetWidget'] = setupUI(widgetTarget, g_ui.getRootWidget())
 panel['targetWidget']:setVisible(config.targetBar)
 
+local isMobile = modules._G.g_app.isMobile();
+g_keyboard = g_keyboard or modules.corelib.g_keyboard;
+
+local isDragKeyPressed = function()
+	return isMobile and g_keyboard.isKeyPressed("F2") or g_keyboard.isCtrlPressed();
+end
+
 local function attachSpellWidgetCallbacks(key)
     panel[key].onDragEnter = function(widget, mousePos)
-        if (not modules.corelib.g_keyboard.isCtrlPressed()) then
-            return false;
-        end
+        if (not isDragKeyPressed()) then 
+            return; 
+        end 
         widget:breakAnchors()
         widget.movingReference = { x = mousePos.x - widget:getX(), y = mousePos.y - widget:getY() }
         return true;
